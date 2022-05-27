@@ -1,1 +1,0 @@
-CMakeLists.txt not found in C:\Repositories\INFORMATION-PROCESSING-TECHNOLOGIES\INFORMATION-PROCESSING-TECHNOLOGIES\Лабораторная работа №1\Research C++ Select CMakeLists.txt
