@@ -1,4 +1,4 @@
-def find_max(base):
+def search_a_maximum_number(base):
     step = 1
     temp1 = 0
     temp2 = 1
@@ -25,7 +25,7 @@ def find_max(base):
     return base
 
 
-def find_min(base):
+def search_a_minimum_number(base):
 
     step = 1
     counter = 0
@@ -47,6 +47,6 @@ def find_min(base):
 
 base = 1
 
-print("Maximum: ", find_max(base))
+print("Maximum: ", search_a_maximum_number(base))
 
-print("Minimum: ", find_min(base))
+print("Minimum: ", search_a_minimum_number(base))
