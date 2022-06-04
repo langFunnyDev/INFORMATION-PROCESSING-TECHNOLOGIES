@@ -2,6 +2,8 @@
 #include <iostream>
 #include <iomanip>
 
+#define numberOfExaminationPasses 250000
+
 std::ofstream myFile;
 
 template <typename T> T processing (T variable) {
@@ -16,15 +18,25 @@ template <typename T> T processing (T variable) {
         return -1;
     }
 
-    T divideResult = T (0);
+    T divideResult = T (0.0);
+    T multiplyResult = T (0.0);
+    int accumulatedErrors = 0;
+    long double errorAccumulationFactor = 0;
 
-    myFile << "id;result;" << std::endl;
-    for (T i = 0; i < T (100000); i += T(1)) {
-        divideResult = T(1) / i;
-        myFile << i << ";" << divideResult << ";" << divideResult * i << std::endl;
+    myFile << "number;accumulated errors;" << std::endl;
+    for (int i = 1; i < numberOfExaminationPasses; ++i) {
+        divideResult = T(1.0) / T(i);
+        multiplyResult = divideResult * T(i);
+        if (multiplyResult != T(1.0)) {
+            accumulatedErrors++;
+            errorAccumulationFactor = (long double) accumulatedErrors / (long double) i;
+            std::cout << i << ";" << errorAccumulationFactor << ";" << std::endl;
+            myFile << i << ";" << errorAccumulationFactor << ";" << std::endl;
+        }
     }
 
     myFile.close();
+    return 0;
 }
 
 
