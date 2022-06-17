@@ -49,8 +49,7 @@ int getRandomDiacritic() {
     return rand() % (0x36F - 0x300 + 1) + 0x300;
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     if (argc <= 2) {
         cout << "Error: invalid number of arguments entered";
         return -1;
