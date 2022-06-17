@@ -1,66 +1,66 @@
-function search_a_max_number(base){
+function search_a_max_number(a){
 
     let temp1 = 0.0;
     let temp2 = 1.0;
-    let step = 1.0;
-    let count = 0.0;
+    let shag = 1.0;
+    let schet = 0.0;
 
     while (temp1 !== temp2) {
 
-        base = temp1;
+        a = temp1;
         temp1 = temp2;
-        temp2 = temp2 + step;
-        step *= 1.3;
+        temp2 = temp2 + shag;
+        shag *= 1.3;
 
-        if (count > 2700) {
-            return "Value boundary not found in 2700 steps";
+        if (schet > 2500) {
+            return "Максимальное значение не найдено спустя 2500 шагов";
         } else {
-            count += 1;
+            schet += 1;
         }
 
     }
 
-    while (base + step !== base) {
+    while (a + shag !== a) {
 
-        if (base + step === temp1){
-            step *= 0.5;
+        if (a + shag === temp1){
+            shag *= 0.5;
         } else {
-            base += step ;
+            a += shag ;
         }
 
-        return base;
+        return a;
 
     }
 
 }
 
-function search_a_min_number(base){
+function search_a_min_number(a){
 
-    let step = 1.0
-    let count = 0.0
+    let shag = 1.0
+    let schet = 0.0
 
-    while (base - step !== base){
+    while (a - shag !== a){
 
-        if (base - step <= 0){
-            step *= 0.5;
+        if (a - shag <= 0){
+            shag *= 0.5;
         } else {
-            base = base - step;
+            a = a - shag;
         }
 
-        if (count > 2700){
-            return "Value boundary not found in 2700 steps";
+        if (schet > 2500){
+            return "Минимальное значение не найдено спустя 2500 шагов";
         } else {
-            count += 1;
+            schet += 1;
         }
 
     }
 
-    return base;
+    return a;
 
 }
 
 x = 1.0;
 
-console.log("Maximum: " + search_a_max_number(x));
+console.log("Максимум: " + search_a_max_number(x));
 
-console.log("Minimum: " + search_a_min_number(x));
+console.log("Минимум: " + search_a_min_number(x));
