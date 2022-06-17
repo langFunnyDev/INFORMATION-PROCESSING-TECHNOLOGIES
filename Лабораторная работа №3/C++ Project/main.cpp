@@ -1,37 +1,36 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
+using namespace std;
+#define numOfPass 250000
 
-#define numberOfExaminationPasses 250000
+ofstream myFile;
 
-std::ofstream myFile;
+float obrabotka (float variable) {
 
-template <typename T> T processing (T variable) {
-
-    std::string file_name = typeid(variable).name();
-    file_name += "_research.csv";
+    string file_name = typeid(variable).name();
+    file_name = file_name + "_research.csv";
 
     myFile.open(file_name);
     if(!myFile.is_open()){
-        std::cout << "ERROR: The program was unable to create an output file." << std::endl
-                  << "The program ended with an error";
+        cout << "Ошибка: не получилось создать файл" << endl;
         return -1;
     }
 
-    T divideResult = T (0.0);
-    T multiplyResult = T (0.0);
-    int accumulatedErrors = 0;
-    long double errorAccumulationFactor = 0;
+    float delRes;
+    float mulRes;
+    int accErr = 0;
+    long double errAccFac;
 
-    myFile << "number;accumulated errors;" << std::endl;
-    for (int i = 1; i < numberOfExaminationPasses; ++i) {
-        divideResult = T(1.0) / T(i);
-        multiplyResult = divideResult * T(i);
-        if (multiplyResult != T(1.0)) {
-            accumulatedErrors++;
-            errorAccumulationFactor = (long double) accumulatedErrors / (long double) i;
-            std::cout << i << ";" << errorAccumulationFactor << ";" << std::endl;
-            myFile << i << ";" << errorAccumulationFactor << ";" << std::endl;
+    myFile << "number;accumulated errors;" << endl;
+    for (int i = 1; i < numOfPass; ++i) {
+        delRes = float(1.0) / float(i);
+        mulRes = delRes * float(i);
+        if (mulRes != float(1.0)) {
+            accErr++;
+            errAccFac = (long double) accErr / (long double) i;
+            cout << i << ";" << errAccFac << ";" << endl;
+            myFile << i << ";" << errAccFac << ";" << endl;
         }
     }
 
@@ -39,6 +38,69 @@ template <typename T> T processing (T variable) {
     return 0;
 }
 
+double obrabotka (double variable) {
+
+    string file_name = typeid(variable).name();
+    file_name = file_name + "_research.csv";
+
+    myFile.open(file_name);
+    if(!myFile.is_open()){
+        cout << "Ошибка: не получилось создать файл" << endl;
+        return -1;
+    }
+
+    double delRes;
+    double mulRes;
+    int accErr = 0;
+    long double errAccFac;
+
+    myFile << "number;accumulated errors;" << endl;
+    for (int i = 1; i < numOfPass; ++i) {
+        delRes = double(1.0) / double(i);
+        mulRes = delRes * double(i);
+        if (mulRes != double(1.0)) {
+            accErr++;
+            errAccFac = (long double) accErr / (long double) i;
+            cout << i << ";" << errAccFac << ";" << endl;
+            myFile << i << ";" << errAccFac << ";" << endl;
+        }
+    }
+
+    myFile.close();
+    return 0;
+}
+
+long double obrabotka (long double variable) {
+
+    string file_name = typeid(variable).name();
+    file_name = file_name + "_research.csv";
+
+    myFile.open(file_name);
+    if(!myFile.is_open()){
+        cout << "Ошибка: не получилось создать файл" << endl;
+        return -1;
+    }
+
+    long double delRes;
+    long double mulRes;
+    int accErr = 0;
+    long double errAccFac;
+
+    myFile << "number;accumulated errors;" << endl;
+    for (int i = 1; i < numOfPass; ++i) {
+        delRes = long double(1.0) / long double(i);
+        mulRes = delRes * long double(i);
+        if (mulRes != long double(1.0)) {
+            accErr++;
+            errAccFac = (long double) accErr / (long double) i;
+            cout << i << ";" << errAccFac << ";" << endl;
+            myFile << i << ";" << errAccFac << ";" << endl;
+        }
+    }
+
+    myFile.close();
+    return 0;
+}
 
 int main() {
 
@@ -46,9 +108,9 @@ int main() {
     double b = 1.0;
     long double c = 1.0;
 
-    processing(a);
-    processing(b);
-    processing(c);
+    obrabotka(a);
+    obrabotka(b);
+    obrabotka(c);
 
     return 0;
 }

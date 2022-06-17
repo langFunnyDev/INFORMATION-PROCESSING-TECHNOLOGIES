@@ -1,16 +1,16 @@
-let base = 1;
-let temp = 0;
+let a = 1;
+let sdvig = 0;
 
-while (base > temp) {
-    temp = base;
-    base = 2 * base;
+while (a > sdvig) {
+    sdvig = a;
+    a = 2 * a;
 }
-console.log(temp);
+console.log("Максимум: " + sdvig);
 
-base = -1;
-temp = 0;
-while (base < temp) {
-    temp = base;
-    base = 2 * base;
+a = -1;
+sdvig = 0;
+while (a < sdvig) {
+    sdvig = a;
+    a = 2 * a;
 }
-console.log(temp);
+console.log("Минимум: " + sdvig);

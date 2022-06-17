@@ -3,58 +3,142 @@
 
 using namespace std;
 
-template<typename T> T search_max_value(T base) {
+float search_max_value(float a) {
 
-    T step = 1;
-    T temp1 = 0;
-    T temp2 = 1;
+    float shag = 1;
+    float temp1 = 0;
+    float temp2 = 1;
 
     while (temp1 != temp2)
     {
-        base = temp1;
+        a = temp1;
         temp1 = temp2;
-        temp2 += step;
-        step *= 1.3;
+        temp2 = temp2 + shag;
+        shag = shag * 1.3;
     }
 
-    while (base + step != base)
+    while ((a + shag) != a)
     {
-        if (base + step == temp1)
+        if ((a + shag) == temp1)
         {
-            step *= 0.5;
+            shag = shag * 0.5;
         }
         else {
-            base += step;
+            a = a + shag;
         }
     }
 
-    return base;
+    return a;
 }
 
 
-template<typename T> T search_min_value(T base) {
-    T step = 1;
+float search_min_value(float a) {
+    float shag = 1;
 
-    while (base - step != base)
+    while ((a - shag) != a)
     {
-        if (base - step <= 0)
+        if ((a - shag) <= 0)
         {
-            step *= 0.5;
+            shag = shag * 0.5;
         }
         else {
-            base -= step;
+            a = a - shag;
         }
     }
 
-    return base;
+    return a;
 }
 
-void output(auto & var){
-    if ((std::string)typeid(var).name() == (std::string)"char"){
-        std::cout << typeid(var).name() << setprecision(16) << " min:" << (int)search_min_value(var) << ", max:" << (int)search_max_value(var) << std::endl;
-    } else {
-        std::cout << typeid(var).name() << setprecision(16) << " min:" << search_min_value(var) << ", max:" << search_max_value(var) << std::endl;
+double search_max_value(double a) {
+
+    double shag = 1;
+    double temp1 = 0;
+    double temp2 = 1;
+
+    while (temp1 != temp2)
+    {
+        a = temp1;
+        temp1 = temp2;
+        temp2 = temp2 + shag;
+        shag = shag * 1.3;
     }
+
+    while ((a + shag) != a)
+    {
+        if ((a + shag) == temp1)
+        {
+            shag = shag * 0.5;
+        }
+        else {
+            a = a + shag;
+        }
+    }
+
+    return a;
+}
+
+
+double search_min_value(double a) {
+    double shag = 1;
+
+    while ((a - shag) != a)
+    {
+        if ((a - shag) <= 0)
+        {
+            shag = shag * 0.5;
+        }
+        else {
+            a = a - shag;
+        }
+    }
+
+    return a;
+}
+
+long double search_max_value(long double a) {
+
+    long double shag = 1;
+    long double temp1 = 0;
+    long double temp2 = 1;
+
+    while (temp1 != temp2)
+    {
+        a = temp1;
+        temp1 = temp2;
+        temp2 = temp2 + shag;
+        shag = shag * 1.3;
+    }
+
+    while ((a + shag) != a)
+    {
+        if ((a + shag) == temp1)
+        {
+            shag = shag * 0.5;
+        }
+        else {
+            a = a + shag;
+        }
+    }
+
+    return a;
+}
+
+
+long double search_min_value(long double a) {
+    long double shag = 1;
+
+    while ((a - shag) != a)
+    {
+        if ((a - shag) <= 0)
+        {
+            shag = shag * 0.5;
+        }
+        else {
+            a = a - shag;
+        }
+    }
+
+    return a;
 }
 
 int main() {
@@ -62,9 +146,9 @@ int main() {
     double var2 = 1;
     long double var3 = 1;
 
-    output(var1);
-    output(var2);
-    output(var3);
+    cout << typeid(var1).name() << setprecision(16) << " min:" << search_min_value(var1) << ", max:" << search_max_value(var1) << endl;
+    cout << typeid(var2).name() << setprecision(16) << " min:" << search_min_value(var2) << ", max:" << search_max_value(var2) << endl;
+    cout << typeid(var3).name() << setprecision(16) << " min:" << search_min_value(var3) << ", max:" << search_max_value(var3) << endl;
 
     return 0;
 }

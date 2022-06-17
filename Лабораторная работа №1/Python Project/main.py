@@ -1,29 +1,19 @@
-# Maximum
+a = 1
+sdvig = 2
+shag = 1
+while sdvig > a:
+    a = sdvig
+    shag = shag * shag / 2 + 1
+    sdvig = a + shag
 
-base = 1
-temp = 0
-step = 1
-while True:
-    temp = base + step
-    if temp > base:
-        base = temp
-        step = step * step / 2 + 1
-    else:
-        break
+print("Максимум: ", a)
 
-print(base)
+a = -1
+sdvig = -2
+shag = 1
+while sdvig < a:
+    a = sdvig
+    shag = shag * shag / 2 + 1
+    sdvig = a - shag
 
-# Minimum
-
-base = -1
-temp = 0
-step = 1
-while True:
-    temp = base - step
-    if temp < base:
-        base = temp
-        step = step * step / 2 + 1
-    else:
-        break
-
-print(base)
+print("Минимум: ", a)
