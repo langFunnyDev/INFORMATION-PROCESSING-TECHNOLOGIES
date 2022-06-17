@@ -1,52 +1,51 @@
-def search_a_maximum_number(base):
-    step = 1
+def search_a_maximum_number(a):
+    shag = 1
     temp1 = 0
     temp2 = 1
-    counter = 0
+    schet = 0
 
     while temp1 != temp2:
 
-        base = temp1
+        a = temp1
         temp1 = temp2
-        temp2 = temp2 + step
-        step *= 1.3
+        temp2 = temp2 + shag
+        shag = shag * 1.3
 
-        if counter > 2700:
-            return "Value boundary not found in 2700 steps"
+        if schet > 2500:
+            return "Максимальное значение не найдено спустя 2500 шагов"
         else:
-            counter += 1
+            schet = schet + 1
 
-    while base + step != base:
+    while (a + shag) != a:
 
-        if base + step == temp1:
-            step *= 0, 5
+        if a + shag == temp1:
+            shag = shag * 0, 5
         else:
-            base += step
-    return base
+            a = a + shag
+    return a
 
 
-def search_a_minimum_number(base):
+def search_a_minimum_number(a):
+    shag = 1
+    schet = 0
 
-    step = 1
-    counter = 0
+    while (a - shag) != a:
 
-    while base - step != base:
-
-        if not base - step > 0:
-            step *= 0.5
+        if not a - shag > 0:
+            shag = shag * 0.5
         else:
-            base = base - step
+            a = a - shag
 
-        if counter > 2700:
-            return "Value boundary not found in 2700 steps"
+        if schet > 2500:
+            return "Максимальное значение не найдено спустя 2500 шагов"
         else:
-            counter += 1
+            schet = schet + 1
 
-    return base
+    return a
 
 
-base = 1
+a = 1
 
-print("Maximum: ", search_a_maximum_number(base))
+print("Максимум: ", search_a_maximum_number(a))
 
-print("Minimum: ", search_a_minimum_number(base))
+print("Минимум: ", search_a_minimum_number(a))
