@@ -9,9 +9,17 @@ ofstream vivod;
 
 vector <int> other_symbols;
 
+<<<<<<< Updated upstream
 int prochestIZapisatByte() {
     int byte = vvod.get();
     vivod.put(byte);
+=======
+int number_of_diacritics = 10;
+
+int readByteAndWriteByte() {
+    int byte = input.get();
+    output.put(byte);
+>>>>>>> Stashed changes
     return byte;
 }
 
@@ -34,7 +42,13 @@ int poluchitCodSimvolaIsCodirovki(unsigned char c1, unsigned char c2, unsigned c
 
 bool poiskIsckluchennihSimvolov (int unicode) {
     for (int other_symbol : other_symbols) {
+<<<<<<< Updated upstream
         return unicode == other_symbol;
+=======
+        if(unicode == other_symbol){
+            return true;
+        }
+>>>>>>> Stashed changes
     }
     return false;
 }
