@@ -42,13 +42,9 @@ int poluchitCodSimvolaIsCodirovki(unsigned char c1, unsigned char c2, unsigned c
 
 bool poiskIsckluchennihSimvolov (int unicode) {
     for (int other_symbol : other_symbols) {
-<<<<<<< Updated upstream
-        return unicode == other_symbol;
-=======
         if(unicode == other_symbol){
             return true;
         }
->>>>>>> Stashed changes
     }
     return false;
 }

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-ofstream output;
+ofstream vivod;
 
 int main(int argc, char * argv[])
 {
@@ -12,35 +12,88 @@ int main(int argc, char * argv[])
         return -1;
     }
 
-    int pictureSideWidth = atoi(argv[1]);
+    int shirina = atoi(argv[1]);
 
-    output.open(argv[2]);
+    vivod.open(argv[2]);
 
-    if (!output.is_open()) {
+    if (!vivod.is_open()) {
         cout << "Error: the program cannot write this file";
         return -1;
     }
 
-    output << R"(<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width=")";
-    output << pictureSideWidth;
-    output << "\" height=\"";
-    output << pictureSideWidth;
-    output << R"("  x="0" y ="0" >)";
+    vivod << R"(<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width=")";
+    vivod << shirina;
+    vivod << "\" height=\"";
+    vivod << shirina;
+    vivod << R"("  x="0" y ="0" >)";
 
-    for (int coordinateX = 0; coordinateX < 8; coordinateX++) {
-        for (int coordinateY = 0; coordinateY < 8; coordinateY++) {
-            output << endl << "<rect x=\"" << (12.5 * coordinateX) << "%\" y=\"" << (12.5 * coordinateY);
-            if ((coordinateX + coordinateY) % 2 == 0) {
-                output << R"(%" width="12.5%" height="12.5%" fill="white" >)";
-            } else {
-                output << R"(%" width="12.5%" height="12.5%" fill="black" >)";
-            }
-            output << "</rect>";
-        }
-    }
+    vivod << R"(<rect x="0%" y="0%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="0%" y="12.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="0%" y="25%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="0%" y="37.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="0%" y="50%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="0%" y="62.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="0%" y="75%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="0%" y="87.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="12.5%" y="0%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="12.5%" y="12.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="12.5%" y="25%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="12.5%" y="37.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="12.5%" y="50%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="12.5%" y="62.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="12.5%" y="75%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="12.5%" y="87.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="25%" y="0%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="25%" y="12.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="25%" y="25%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="25%" y="37.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="25%" y="50%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="25%" y="62.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="25%" y="75%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="25%" y="87.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="37.5%" y="0%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="37.5%" y="12.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="37.5%" y="25%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="37.5%" y="37.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="37.5%" y="50%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="37.5%" y="62.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="37.5%" y="75%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="37.5%" y="87.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="50%" y="0%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="50%" y="12.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="50%" y="25%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="50%" y="37.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="50%" y="50%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="50%" y="62.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="50%" y="75%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="50%" y="87.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="62.5%" y="0%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="62.5%" y="12.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="62.5%" y="25%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="62.5%" y="37.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="62.5%" y="50%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="62.5%" y="62.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="62.5%" y="75%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="62.5%" y="87.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="75%" y="0%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="75%" y="12.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="75%" y="25%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="75%" y="37.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="75%" y="50%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="75%" y="62.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="75%" y="75%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="75%" y="87.5%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="87.5%" y="0%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="87.5%" y="12.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="87.5%" y="25%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="87.5%" y="37.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="87.5%" y="50%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="87.5%" y="62.5%" width="12.5%" height="12.5%" fill="white" ></rect>
+                <rect x="87.5%" y="75%" width="12.5%" height="12.5%" fill="black" ></rect>
+                <rect x="87.5%" y="87.5%" width="12.5%" height="12.5%" fill="white" ></rect>")";
 
-    output << endl << "</svg>";
-    output.close();
+    vivod << endl << "</svg>";
+    vivod.close();
     return 0;
 }
 
