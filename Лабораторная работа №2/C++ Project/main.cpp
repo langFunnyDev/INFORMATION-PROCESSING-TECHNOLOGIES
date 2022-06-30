@@ -1,70 +1,108 @@
 #include <iostream>
-#include <iomanip>
+#include <limits>
 
 using namespace std;
 
-template<typename T> T search_max_value(T base) {
+template <typename T> T search_positive_limit_max () {
+    T leftBorderOfNumber;
+    T rightBorderOfNumber = (T) 2;
+    long double step = 2;
 
-    T step = 1;
-    T temp1 = 0;
-    T temp2 = 1;
-
-    while (temp1 != temp2)
-    {
-        base = temp1;
-        temp1 = temp2;
-        temp2 += step;
-        step *= 1.3;
-    }
-
-    while (base + step != base)
-    {
-        if (base + step == temp1)
-        {
-            step *= 0.5;
-        }
-        else {
-            base += step;
+    while (true) {
+        leftBorderOfNumber = rightBorderOfNumber;
+        rightBorderOfNumber *= step;
+        if (rightBorderOfNumber == INFINITY) {
+            rightBorderOfNumber = leftBorderOfNumber + step;
+            break;
         }
     }
 
-    return base;
+    while (true) {
+        leftBorderOfNumber = rightBorderOfNumber;
+        step *= 3;
+        rightBorderOfNumber += step;
+        if (rightBorderOfNumber == INFINITY) break;
+    }
+
+    while (true) {
+        rightBorderOfNumber = leftBorderOfNumber + step;
+        if (rightBorderOfNumber == leftBorderOfNumber) break;
+        (rightBorderOfNumber == INFINITY) ? (step /= 2) : (leftBorderOfNumber = rightBorderOfNumber);
+    }
+
+    return leftBorderOfNumber;
 }
 
 
-template<typename T> T search_min_value(T base) {
-    T step = 1;
+template <typename T> T search_positive_limit_min () {
+    T leftBorderOfNumber;
+    T rightBorderOfNumber = (T) 1;
+    long double step = 0.5;
 
-    while (base - step != base)
-    {
-        if (base - step <= 0)
-        {
-            step *= 0.5;
-        }
-        else {
-            base -= step;
+    while (true) {
+        leftBorderOfNumber = rightBorderOfNumber - step;
+        if (rightBorderOfNumber == leftBorderOfNumber) break;
+        (leftBorderOfNumber <= 0) ? (step /= 2) : (rightBorderOfNumber = leftBorderOfNumber);
+    }
+
+    return rightBorderOfNumber;
+}
+
+
+template <typename T> T search_negative_limit_max() {
+    T leftBorderOfNumber = (T) -2;
+    T rightBorderOfNumber = (T) -1;
+    long double step = 2;
+
+    while (true) {
+        rightBorderOfNumber = leftBorderOfNumber;
+        leftBorderOfNumber *= step;
+        if (leftBorderOfNumber == -INFINITY) {
+            leftBorderOfNumber = rightBorderOfNumber - step;
+            break;
         }
     }
 
-    return base;
-}
-
-void output(auto & var){
-    if ((std::string)typeid(var).name() == (std::string)"char"){
-        std::cout << typeid(var).name() << setprecision(16) << " min:" << (int)search_min_value(var) << ", max:" << (int)search_max_value(var) << std::endl;
-    } else {
-        std::cout << typeid(var).name() << setprecision(16) << " min:" << search_min_value(var) << ", max:" << search_max_value(var) << std::endl;
+    while (true) {
+        rightBorderOfNumber = leftBorderOfNumber;
+        step *= 3;
+        leftBorderOfNumber -= step;
+        if (leftBorderOfNumber == -INFINITY) break;
     }
+
+    while (true) {
+        leftBorderOfNumber = rightBorderOfNumber - step;
+        if (rightBorderOfNumber == leftBorderOfNumber) break;
+        (leftBorderOfNumber == -INFINITY) ? (step = step / 2) : (rightBorderOfNumber = leftBorderOfNumber);
+    }
+
+    return rightBorderOfNumber;
 }
 
-int main() {
-    float var1 = 1;
-    double var2 = 1;
-    long double var3 = 1;
 
-    output(var1);
-    output(var2);
-    output(var3);
+template <typename T> T search_negative_limit_min() {
+    T leftBorderOfNumber = (T) -1;
+    T rightBorderOfNumber;
+    long double step = 0.5;
 
+    while (true) {
+        rightBorderOfNumber = leftBorderOfNumber + step;
+        if (rightBorderOfNumber == leftBorderOfNumber) break;
+        (rightBorderOfNumber >= 0) ? (step /= 2) : (leftBorderOfNumber = rightBorderOfNumber);
+    }
+
+    return leftBorderOfNumber;
+}
+
+template <typename T> void fine_print () {
+    cout << typeid(T).name() << " max(+): " << search_positive_limit_max <T> () << "; min(+): " << search_positive_limit_min <T> ()
+         << "; max(-): " << search_negative_limit_max <T> () << "; min(-): " << search_negative_limit_min <T> () << endl;
+}
+
+int main()
+{
+    fine_print <float> ();
+    fine_print <double> ();
+    fine_print <long double> ();
     return 0;
 }

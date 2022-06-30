@@ -1,52 +1,90 @@
-def search_a_maximum_number(base):
-    step = 1
-    temp1 = 0
-    temp2 = 1
-    counter = 0
+p_inf = float('inf')
+n_inf = float('-inf')
 
-    while temp1 != temp2:
 
-        base = temp1
-        temp1 = temp2
-        temp2 = temp2 + step
-        step *= 1.3
-
-        if counter > 2700:
-            return "Value boundary not found in 2700 steps"
+def search_positive_limit_max():
+    rightBorderOfNumber = 2.0
+    step = 2.0
+    while True:
+        leftBorderOfNumber = rightBorderOfNumber
+        rightBorderOfNumber *= step
+        if rightBorderOfNumber == p_inf:
+            rightBorderOfNumber = leftBorderOfNumber + step
+            break
+    while True:
+        step *= 3.0
+        leftBorderOfNumber = rightBorderOfNumber
+        rightBorderOfNumber += step
+        if rightBorderOfNumber == p_inf:
+            break
+    while True:
+        rightBorderOfNumber = leftBorderOfNumber + step
+        if rightBorderOfNumber == leftBorderOfNumber:
+            break
+        if rightBorderOfNumber == p_inf:
+            step /= 2.0
         else:
-            counter += 1
+            leftBorderOfNumber = rightBorderOfNumber
+    return leftBorderOfNumber
 
-    while base + step != base:
 
-        if base + step == temp1:
-            step *= 0, 5
+def search_positive_limit_min():
+    rightBorderOfNumber = 1.0
+    step = 0.5
+    while True:
+        leftBorderOfNumber = rightBorderOfNumber - step
+        if rightBorderOfNumber == leftBorderOfNumber:
+            break
+        if leftBorderOfNumber <= 0:
+            step = step / 2.0
         else:
-            base += step
-    return base
+            rightBorderOfNumber = leftBorderOfNumber
+    return rightBorderOfNumber
 
 
-def search_a_minimum_number(base):
-
-    step = 1
-    counter = 0
-
-    while base - step != base:
-
-        if not base - step > 0:
-            step *= 0.5
+def search_negative_limit_max():
+    leftBorderOfNumber = -2.0
+    rightBorderOfNumber = -1.0
+    step = 2.0
+    last_step = 0
+    while True:
+        leftBorderOfNumber *= step
+        if leftBorderOfNumber == n_inf:
+            leftBorderOfNumber = rightBorderOfNumber - step
+            break
+    while True:
+        last_step = step
+        step *= 3.0
+        rightBorderOfNumber = leftBorderOfNumber
+        leftBorderOfNumber -= step
+        if leftBorderOfNumber == n_inf:
+            if step == p_inf:
+                step = last_step
+            break
+    while True:
+        leftBorderOfNumber = rightBorderOfNumber - step
+        if rightBorderOfNumber == leftBorderOfNumber:
+            break
+        if leftBorderOfNumber == n_inf:
+            step /= 2.0
         else:
-            base = base - step
+            rightBorderOfNumber = leftBorderOfNumber
+    return rightBorderOfNumber
 
-        if counter > 2700:
-            return "Value boundary not found in 2700 steps"
+
+def search_negative_limit_min():
+    leftBorderOfNumber = -1.0
+    step = 0.5
+    while True:
+        rightBorderOfNumber = leftBorderOfNumber + step
+        if rightBorderOfNumber == leftBorderOfNumber:
+            break
+        if rightBorderOfNumber >= 0:
+            step /= 2.0
         else:
-            counter += 1
+            leftBorderOfNumber = rightBorderOfNumber
+    return leftBorderOfNumber
 
-    return base
 
-
-base = 1
-
-print("Maximum: ", search_a_maximum_number(base))
-
-print("Minimum: ", search_a_minimum_number(base))
+print('(+) max: ', search_positive_limit_max(), ' min: ', search_positive_limit_min())
+print('(-) max: ', search_negative_limit_max(), ' min: ', search_negative_limit_min())

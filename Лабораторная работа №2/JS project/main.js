@@ -1,66 +1,109 @@
-function search_a_max_number(base){
+function search_positive_limit_max() {
+    let leftBorderOfNumber = 1
+    let rightBorderOfNumber = 2
+    let step = 2
 
-    let temp1 = 0.0;
-    let temp2 = 1.0;
-    let step = 1.0;
-    let count = 0.0;
-
-    while (temp1 !== temp2) {
-
-        base = temp1;
-        temp1 = temp2;
-        temp2 = temp2 + step;
-        step *= 1.3;
-
-        if (count > 2700) {
-            return "Value boundary not found in 2700 steps";
-        } else {
-            count += 1;
+    while (true){
+        leftBorderOfNumber = rightBorderOfNumber
+        rightBorderOfNumber *= step
+        if (rightBorderOfNumber === Infinity) {
+            rightBorderOfNumber = leftBorderOfNumber + step
+            break
         }
-
     }
-
-    while (base + step !== base) {
-
-        if (base + step === temp1){
-            step *= 0.5;
-        } else {
-            base += step ;
+    while (true) {
+        step *= 3
+        leftBorderOfNumber = rightBorderOfNumber
+        rightBorderOfNumber += step
+        if (rightBorderOfNumber === Infinity) {
+            break
         }
-
-        return base;
-
     }
-
+    while (true) {
+        rightBorderOfNumber = leftBorderOfNumber + step
+        if (rightBorderOfNumber === leftBorderOfNumber) {
+            break
+        }
+        if(rightBorderOfNumber === Infinity) {
+            step /= 2
+        } else {
+            leftBorderOfNumber = rightBorderOfNumber
+        }
+    }
+    return leftBorderOfNumber
 }
 
-function search_a_min_number(base){
 
-    let step = 1.0
-    let count = 0.0
-
-    while (base - step !== base){
-
-        if (base - step <= 0){
-            step *= 0.5;
-        } else {
-            base = base - step;
+function search_positive_limit_min() {
+    let leftBorderOfNumber
+    let rightBorderOfNumber = 1
+    let step = 0.5
+    while (true) {
+        leftBorderOfNumber = rightBorderOfNumber - step
+        if(rightBorderOfNumber === leftBorderOfNumber) {
+            break
         }
-
-        if (count > 2700){
-            return "Value boundary not found in 2700 steps";
+        if(leftBorderOfNumber <= 0) {
+            step /= 2
         } else {
-            count += 1;
+            rightBorderOfNumber = leftBorderOfNumber
         }
-
     }
-
-    return base;
-
+    return rightBorderOfNumber
 }
 
-x = 1.0;
 
-console.log("Maximum: " + search_a_max_number(x));
+function search_negative_limit_max() {
+    let leftBorderOfNumber = -2
+    let rightBorderOfNumber = 1
+    let step = 2
+    while (true) {
+        rightBorderOfNumber = leftBorderOfNumber
+        leftBorderOfNumber *= step
+        if (leftBorderOfNumber === -Infinity) {
+            leftBorderOfNumber = rightBorderOfNumber + step
+            break
+        }
+    }
+    while (true) {
+        step *= 3
+        rightBorderOfNumber = leftBorderOfNumber
+        leftBorderOfNumber -= step
+        if (leftBorderOfNumber === -Infinity) {
+            break
+        }
+    }
+    while (true) {
+        leftBorderOfNumber = rightBorderOfNumber - step
+        if (rightBorderOfNumber === leftBorderOfNumber) {
+            break
+        }
+        if (leftBorderOfNumber === -Infinity) {
+            step /= 2
+        } else {
+            rightBorderOfNumber = leftBorderOfNumber
+        }
+    }
+    return rightBorderOfNumber
+}
 
-console.log("Minimum: " + search_a_min_number(x));
+function search_negative_limit_min() {
+    let leftBorderOfNumber = -1
+    let rightBorderOfNumber
+    let step = 0.5
+    while (true){
+        rightBorderOfNumber = leftBorderOfNumber + step
+        if(rightBorderOfNumber === leftBorderOfNumber) {
+            break
+        }
+        if(rightBorderOfNumber >= 0) {
+            step /= 2
+        } else {
+            leftBorderOfNumber = rightBorderOfNumber
+        }
+    }
+    return leftBorderOfNumber
+}
+
+console.log("(+) max: " + search_positive_limit_max() + " min: " + search_positive_limit_min())
+console.log("(-) max: " + search_negative_limit_max() + " min: " + search_negative_limit_min())
