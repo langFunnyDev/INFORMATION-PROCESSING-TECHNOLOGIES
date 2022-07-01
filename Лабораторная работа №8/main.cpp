@@ -16,7 +16,7 @@ int main(int argc, char * argv[])
 
     int pictureSideWidth =  atoi(argv[1]);
 
-    output.open(argv[2]);
+    output.open(argv[2], ios::binary);
 
     if (!output.is_open()) {
         cout << "Error: the program cannot write this file";

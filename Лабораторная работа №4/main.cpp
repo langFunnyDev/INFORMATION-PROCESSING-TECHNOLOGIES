@@ -7,11 +7,11 @@ int skip_bytes(int count){
     for (int i = 0; i < count; ++i) {
         if (!MyFile.eof()){
             MyFile.get();
-            return 1;
         } else {
             return 0;
         }
     }
+    return 1;
 }
 
 int main(int argc, char * argv[]){
@@ -19,7 +19,7 @@ int main(int argc, char * argv[]){
     int counter = 0;
 
     if (argc > 1) {
-        MyFile.open(argv[1]);
+        MyFile.open(argv[1], std::ios::binary);
         if(!MyFile.is_open()){
             std::cout << "ERROR: The file is not accessible or the path is incorrect." << std::endl
                       << "The program ended with an error";

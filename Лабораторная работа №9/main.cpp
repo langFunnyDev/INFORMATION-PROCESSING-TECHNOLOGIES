@@ -25,7 +25,7 @@ int main(int argc, char * argv[])
     output << pictureSideWidth;
     output << "\" height=\"";
     output << pictureSideWidth;
-    output << R"("  x="0" y ="0" >)";
+    output << R"("  x="0" y="0" >)";
 
     for (int coordinateX = 0; coordinateX < 8; coordinateX++) {
         for (int coordinateY = 0; coordinateY < 8; coordinateY++) {

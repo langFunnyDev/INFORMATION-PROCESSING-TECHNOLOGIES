@@ -14,7 +14,7 @@ int main(int argc, char * argv[])
         return -1;
     }
 
-    output.open(argv[4]);
+    output.open(argv[4], ios::binary);
 
     int frequency = atoi(argv[1]);
     int amplitude = atoi(argv[2]);
