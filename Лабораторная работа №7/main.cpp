@@ -5,40 +5,74 @@
 
 using namespace std;
 
-ofstream output;
+ofstream myFile;
+
+void write_header(int cSize, int scSize){
+    myFile.put(82);
+    myFile.put(73);
+    myFile.put(70);
+    myFile.put(70);
+    myFile.put(cSize & 0xFF);
+    myFile.put((cSize >> 8) & 0xFF);
+    myFile.put((cSize >> 16) & 0xFF);
+    myFile.put((cSize >> 24) & 0xFF);
+    myFile.put(87);
+    myFile.put(65);
+    myFile.put(86);
+    myFile.put(69);
+    myFile.put(102);
+    myFile.put(109);
+    myFile.put(116);
+    myFile.put(32);
+    myFile.put(16);
+    myFile.put(0);
+    myFile.put(0);
+    myFile.put(0);
+    myFile.put(1);
+    myFile.put(0);
+    myFile.put(1);
+    myFile.put(0);
+    myFile.put(68);
+    myFile.put(172);
+    myFile.put(0);
+    myFile.put(0);
+    myFile.put(136);
+    myFile.put(88);
+    myFile.put(1);
+    myFile.put(0);
+    myFile.put(2);
+    myFile.put(0);
+    myFile.put(16);
+    myFile.put(0);
+    myFile.put(100);
+    myFile.put(97);
+    myFile.put(116);
+    myFile.put(97);
+    myFile.put(scSize & 0xFF);
+    myFile.put((scSize >> 8) & 0xFF);
+    myFile.put((scSize >> 16) & 0xFF);
+    myFile.put((scSize >> 24) & 0xFF);
+}
 
 int main(int argc, char * argv[])
 {
-    if (argc < 4) {
-        cout << "Error: invalid number of arguments entered";
-        return -1;
-    }
-
-    output.open(argv[4], ios::binary);
-
+    if (argc < 4) return -1;
     int frequency = atoi(argv[1]);
     int amplitude = atoi(argv[2]);
     int time = atoi(argv[3]);
-
-    int fileSize = (time * 44100) * 2 + 44;
-    int ChunkSize = fileSize - 8;
-    int subChunkSize = (time * 44100) * 2;
-
-    vector <int> header = {82, 73, 70, 70, ChunkSize & 0xFF, (ChunkSize >> 8) & 0xFF, (ChunkSize >> 16) & 0xFF, (ChunkSize >> 24) & 0xFF, 87, 65, 86, 69, 102, 109, 116, 32, 16, 0, 0, 0, 1, 0, 1, 0, 68, 172, 0, 0, 136, 88, 1, 0, 2, 0, 16, 0, 100, 97, 116, 97, subChunkSize & 0xFF, (subChunkSize >> 8) & 0xFF, (subChunkSize >> 16) & 0xFF, (subChunkSize >> 24) & 0xFF};
-
-    for (int raw_byte : header) {
-        output.put(raw_byte);
-    }
-
+    myFile.open(argv[4], ios::binary);
+    if (!myFile.is_open()) return -1;
+    int fSize = (time * 44100) * 2 + 44;
+    int cSize = fSize - 8;
+    int scSize = (time * 44100) * 2;
+    write_header(cSize, scSize);
     for (int i = 0; i < time * 44100; i++) {
         float sec = (float) i / 44100.0f;
         int signal = amplitude * sin(sec * (frequency) * (2 * 3.14));
-
-        output.put(signal & 0xFF);
-        output.put((signal >> 8) & 0xFF);
+        myFile.put(signal & 0xFF);
+        myFile.put((signal >> 8) & 0xFF);
     }
-
-    output.close();
+    myFile.close();
     return 0;
 }
 
