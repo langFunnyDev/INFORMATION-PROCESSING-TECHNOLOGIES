@@ -26,7 +26,7 @@ void readBytesInCorrectSequence (int BOM_State, int &byte_1, int &byte_2) {
     }
 }
 
-void encodeAndWhiteUTF8Bytes (int unicode) {
+void encodeAndWriteUTF8Bytes (int unicode) {
     if (unicode < 128) {
         output.put(unicode);
     } else if (unicode < 2048) {
@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
                 surrogate_byte_pair = (byte_1 << 8) | byte_2;
                 byte_pair = (byte_pair << 16) | surrogate_byte_pair;
             }
-            encodeAndWhiteUTF8Bytes(byte_pair);
+            encodeAndWriteUTF8Bytes(byte_pair);
         }
     }
 
