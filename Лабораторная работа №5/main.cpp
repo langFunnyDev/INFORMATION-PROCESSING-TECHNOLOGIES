@@ -14,7 +14,7 @@ int number_of_diacritics = 1;
 
 int readByteAndWriteByte() {
     int byte = input.get();
-    output.put(byte);
+    if (byte > -1)    output.put(byte);
     return byte;
 }
 
@@ -32,17 +32,16 @@ int getUnicodeFromUTF(unsigned char c1, unsigned char c2, unsigned char c3) {
 }
 
 int getUnicodeFromUTF(unsigned char c1, unsigned char c2, unsigned char c3, unsigned char c4) {
-    return (c1 & 0x0F) << 18 | (c2 & 0x3F) << 12 | (c3 & 0x3F)<<6 | (c4 & 0x3F);
+    return (c1 & 0x07) << 18 | (c2 & 0x3F) << 12 | (c3 & 0x3F)<<6 | (c4 & 0x3F);
 }
 
 bool searchForExcludedCharacters (int unicode) {
     for (int other_symbol : other_symbols) {
         if(unicode == other_symbol){
             return true;
-        } else {
-            return false;
         }
     }
+    return false;
 }
 
 int getRandomDiacritic() {
